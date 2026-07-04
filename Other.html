@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Peggy · Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* ---------- RESET & BASE ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            background: #f4f8fe;
+            color: #1a2b3c;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* ---------- MOTIFS : DÉGRADÉS, FORMES, ANIMATIONS ---------- */
+        .bg-pattern {
+            position: relative;
+            overflow: hidden;
+        }
+        .bg-pattern::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .bg-pattern::after {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            left: -5%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(59,130,246,0.04) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .section {
+            padding: 4rem 0;
+            border-bottom: 1px solid #eef2f6;
+            scroll-margin-top: 80px;
+            position: relative;
+            z-index: 1;
+        }
+        .section:last-of-type {
+            border-bottom: none;
+        }
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: #0b1c2e;
+            position: relative;
+            display: inline-block;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            margin-top: 8px;
+            border-radius: 4px;
+        }
+
+        /* ---------- HEADER ---------- */
+        .navbar {
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(12px);
+            padding: 0.8rem 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            border-bottom: 1px solid rgba(233,237,242,0.6);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo a {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: #0b1c2e;
+        }
+        .logo span {
+            color: #3b82f6;
+        }
+        .nav-links {
+            display: flex;
+            gap: 1.8rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .nav-links a {
+            font-weight: 500;
+            color: #1e2f40;
+            transition: 0.2s;
+            font-size: 0.95rem;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            transition: 0.3s;
+        }
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+        .nav-links a.active {
+            color: #3b82f6;
+        }
+
+        /* ---------- HERO (motif : cercles flottants) ---------- */
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 3rem;
+            padding: 1rem 0 0.5rem;
+            position: relative;
+        }
+        .hero::before {
+            content: '✦ ✦ ✦';
+            position: absolute;
+            top: 10%;
+            right: 5%;
+            font-size: 2rem;
+            color: rgba(59,130,246,0.08);
+            letter-spacing: 1.5rem;
+            pointer-events: none;
+        }
+        .hero-content {
+            flex: 1 1 300px;
+        }
+        .hero-content .badge {
+            background: linear-gradient(135deg, #e8edf5, #dce6f2);
+            display: inline-block;
+            padding: 0.3rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #1e3a6b;
+            margin-bottom: 1rem;
+        }
+        .hero-content h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+        .hero-content h1 span {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-content .subhead {
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: #2c3e50;
+            margin-bottom: 0.8rem;
+        }
+        .hero-content p {
+            color: #3d4f62;
+            max-width: 500px;
+            margin-bottom: 1.5rem;
+        }
+        .hero-content .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-bottom: 1.5rem;
+        }
+        .hero-content .tags span {
+            background: white;
+            padding: 0.3rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            transition: 0.2s;
+        }
+        .hero-content .tags span:hover {
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+        }
+        .btn {
+            background: linear-gradient(135deg, #3b82f6, #6366f1);
+            color: #fff;
+            border: none;
+            padding: 0.8rem 2.2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.25s;
+            display: inline-block;
+            box-shadow: 0 4px 14px rgba(59,130,246,0.25);
+        }
+        .btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 24px rgba(59,130,246,0.35);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #3b82f6;
+            color: #3b82f6;
+            margin-left: 0.8rem;
+            box-shadow: none;
+        }
+        .btn-outline:hover {
+            background: #3b82f6;
+            color: #fff;
+            box-shadow: 0 8px 24px rgba(59,130,246,0.25);
+        }
+        .hero-image {
+            flex: 1 1 260px;
+            text-align: center;
+            position: relative;
+        }
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 2px dashed rgba(59,130,246,0.15);
+            border-radius: 50% 30% 50% 30% / 40% 50% 30% 50%;
+            animation: spin 30s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .hero-image img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 50% 30% 50% 30% / 40% 50% 30% 50%;
+            box-shadow: 0 20px 40px -8px rgba(0,0,0,0.12);
+            border: 4px solid white;
+            object-fit: cover;
+            aspect-ratio: 1/1;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ---------- SERVICES (motif : lignes obliques) ---------- */
+        #services {
+            background: linear-gradient(180deg, #f4f8fe 0%, #ffffff 100%);
+        }
+        #services .section-title::after {
+            background: linear-gradient(90deg, #8b5cf6, #ec4899);
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+        .service-card {
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(4px);
+            padding: 1.8rem 1.5rem;
+            border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.6);
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #8b5cf6, #ec4899);
+            opacity: 0;
+            transition: 0.3s;
+        }
+        .service-card:hover::before {
+            opacity: 1;
+        }
+        .service-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.06);
+            border-color: #dce3ec;
+        }
+        .service-card i {
+            font-size: 2.2rem;
+            background: linear-gradient(135deg, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.8rem;
+        }
+        .service-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.4rem;
+        }
+        .service-card p {
+            color: #495e72;
+            font-size: 0.95rem;
+        }
+
+        /* ---------- COMPÉTENCES (motif : points) ---------- */
+        #competences {
+            background: #ffffff;
+        }
+        #competences .section-title::after {
+            background: linear-gradient(90deg, #3b82f6, #06b6d4);
+        }
+        .skills-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+        }
+        .skill-group {
+            flex: 1 1 200px;
+            background: rgba(243, 248, 255, 0.5);
+            padding: 1.5rem;
+            border-radius: 24px;
+            border: 1px solid #eef2f6;
+            position: relative;
+        }
+        .skill-group::before {
+            content: '•••';
+            position: absolute;
+            top: 10px;
+            right: 16px;
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            color: rgba(59,130,246,0.15);
+        }
+        .skill-group h4 {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #0b1c2e;
+        }
+        .skill-tag {
+            display: inline-block;
+            background: white;
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            border: 1px solid #dde4ec;
+            margin: 0.3rem 0.3rem 0 0;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+        .skill-tag:hover {
+            border-color: #3b82f6;
+            background: #f0f6ff;
+        }
+
+        /* ---------- ÉDUCATION (motif : vagues) ---------- */
+        #education {
+            background: linear-gradient(180deg, #ffffff, #f8faff);
+        }
+        #education .section-title::after {
+            background: linear-gradient(90deg, #06b6d4, #3b82f6);
+        }
+        .edu-item {
+            background: white;
+            padding: 1.5rem 2rem;
+            border-radius: 20px;
+            border-left: 6px solid transparent;
+            border-image: linear-gradient(180deg, #06b6d4, #3b82f6) 1;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.02);
+            transition: 0.2s;
+            position: relative;
+        }
+        .edu-item::after {
+            content: '~';
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            font-size: 2rem;
+            color: rgba(6,182,212,0.06);
+        }
+        .edu-item:hover {
+            transform: translateX(6px);
+        }
+        .edu-item h3 {
+            font-size: 1.3rem;
+        }
+        .edu-item .meta {
+            color: #3d5a78;
+            font-weight: 500;
+            margin: 0.2rem 0 0.4rem;
+        }
+
+        /* ---------- EXPÉRIENCE (motif : zigzag) ---------- */
+        #experience {
+            background: #f8faff;
+        }
+        #experience .section-title::after {
+            background: linear-gradient(90deg, #8b5cf6, #3b82f6);
+        }
+        .exp-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 1.8rem;
+        }
+        .exp-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 20px;
+            border: 1px solid #eef2f6;
+            transition: 0.3s;
+            position: relative;
+        }
+        .exp-card::before {
+            content: '⚡';
+            position: absolute;
+            top: 10px;
+            right: 14px;
+            font-size: 1.2rem;
+            opacity: 0.2;
+        }
+        .exp-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.04);
+        }
+        .exp-card .exp-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        .exp-card .exp-org {
+            color: #3b82f6;
+            font-weight: 500;
+        }
+        .exp-card .exp-date {
+            font-size: 0.9rem;
+            color: #61768b;
+            margin: 0.3rem 0;
+        }
+
+        /* ---------- CONTACT + LOGOS (motif : étoiles) ---------- */
+        #contact {
+            background: #ffffff;
+        }
+        #contact .section-title::after {
+            background: linear-gradient(90deg, #ec4899, #8b5cf6);
+        }
+        .logos-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.2rem 2rem;
+            align-items: center;
+            margin: 1.5rem 0 2rem;
+            padding: 1.2rem;
+            background: rgba(243, 248, 255, 0.4);
+            border-radius: 60px;
+            border: 1px solid #eef2f6;
+            position: relative;
+        }
+        .logos-grid::before {
+            content: '✦ ✦ ✦';
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            font-size: 0.8rem;
+            color: rgba(59,130,246,0.08);
+            letter-spacing: 6px;
+        }
+        .logos-grid .logo-item {
+            background: white;
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            border: 1px solid #e2e8f0;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #1e2f40;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .logos-grid .logo-item i {
+            color: #3b82f6;
+            font-size: 1rem;
+        }
+        .logos-grid .logo-item:hover {
+            border-color: #8b5cf6;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(59,130,246,0.06);
+        }
+        .contact-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+            border: 1px solid #e9edf2;
+            position: relative;
+        }
+        .contact-row::before {
+            content: '✦';
+            position: absolute;
+            bottom: 20px;
+            right: 30px;
+            font-size: 4rem;
+            color: rgba(59,130,246,0.03);
+        }
+        .contact-info {
+            flex: 1 1 240px;
+        }
+        .contact-info p {
+            margin: 0.8rem 0;
+        }
+        .contact-info i {
+            width: 28px;
+            color: #3b82f6;
+        }
+        .contact-form {
+            flex: 2 1 300px;
+        }
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.8rem 1.2rem;
+            border: 1px solid #dce3ec;
+            border-radius: 30px;
+            margin-bottom: 1rem;
+            font-family: inherit;
+            background: #fafcfe;
+            transition: 0.2s;
+        }
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: #8b5cf6;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(139,92,246,0.08);
+        }
+        .contact-form button {
+            background: linear-gradient(135deg, #8b5cf6, #ec4899);
+            color: white;
+            border: none;
+            padding: 0.8rem 2.4rem;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 14px rgba(139,92,246,0.25);
+        }
+        .contact-form button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(139,92,246,0.35);
+        }
+
+        /* ---------- FOOTER ---------- */
+        .footer {
+            background: #0b1c2e;
+            color: #cbd8e8;
+            padding: 2.5rem 0;
+            text-align: center;
+            border-top: 1px solid #1e3349;
+        }
+        .footer a {
+            color: #96b4d4;
+            margin: 0 0.6rem;
+            transition: 0.2s;
+        }
+        .footer a:hover {
+            color: white;
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 700px) {
+            .navbar {
+                flex-direction: column;
+                gap: 0.6rem;
+                align-items: flex-start;
+            }
+            .nav-links {
+                gap: 1rem;
+            }
+            .hero-content h1 {
+                font-size: 2.6rem;
+            }
+            .section-title {
+                font-size: 1.9rem;
+            }
+            .contact-row {
+                padding: 1.5rem;
+            }
+            .hero-image img {
+                max-width: 220px;
+            }
+            .logos-grid {
+                border-radius: 30px;
+                padding: 1rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            .btn {
+                padding: 0.6rem 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== HEADER ========== -->
+    <header class="navbar">
+        <div class="logo">
+            <a href="#accueil">Peggy<span>.</span></a>
+        </div>
+        <nav class="nav-links">
+            <a href="#accueil" class="active">Accueil</a>
+            <a href="#services">Services</a>
+            <a href="#competences">Compétences</a>
+            <a href="#education">Éducation</a>
+            <a href="#experience">Expérience</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+ <!-- ========== PAGE 1 : ACCUEIL (motif : cercles flottants) ========== -->
+    <section id="accueil" class="section bg-pattern">
+        <div class="container">
+            <div class="hero">
+                <div class="hero-content">
+                    <div class="badge"><i class="fas fa-code"></i> Étudiante · Artiste · Dev</div>
+                    <h1>Hi, c'est <span>Peggy</span></h1>
+                    <div class="subhead">Génie informatique & Distribution musicale</div>
+                    <p>
+                        De l'UCBC aux plateformes de streaming, je construis des ponts entre 
+                        le code, la musique et la créativité.
+                    </p>
+                    <div class="tags">
+                        <span><i class="fas fa-music"></i> Artiste</span>
+                        <span><i class="fas fa-dumbbell"></i> Gym</span>
+                        <span><i class="fas fa-square-root-alt"></i> Maths</span>
+                        <span><i class="fas fa-code"></i> Dev</span>
+                    </div>
+                    <div>
+                        <a href="#contact" class="btn">Me contacter</a>
+                        <a href="#services" class="btn btn-outline">Mes services</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="https://i.ibb.co/21tR6PTH/PXL-20230425-132239854-PORTRAIT-2.jpg" alt="Peggy" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PAGE 2 : SERVICES (motif : lignes obliques) ========== -->
+    <section id="services" class="section">
+        <div class="container">
+            <h2 class="section-title">Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-music"></i>
+                    <h3>Distribution musicale</h3>
+                    <p>Mise en ligne sur Spotify, Apple Music, Deezer, Tidal, et toutes les plateformes.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-laptop-code"></i>
+                    <h3>Développement Web</h3>
+                    <p>Sites vitrines, portfolios, interfaces modernes pour artistes & startups.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-hashtag"></i>
+                    <h3>Stratégie digitale</h3>
+                    <p>Gestion des réseaux sociaux, campagne de promotion, engagement des communautés.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-chart-simple"></i>
+                    <h3>Référencement & Analytics</h3>
+                    <p>Optimisation SEO, suivi des performances sur les plateformes de streaming.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PAGE 3 : COMPÉTENCES (motif : points) ========== -->
+    <section id="competences" class="section">
+        <div class="container">
+            <h2 class="section-title">Compétences</h2>
+            <div class="skills-wrapper">
+                <div class="skill-group">
+                    <h4><i class="fas fa-code"></i> Programmation</h4>
+                    <span class="skill-tag">HTML5 / CSS3</span>
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">C / C++</span>
+                    <span class="skill-tag">Git</span>
+                </div>
+                <div class="skill-group">
+                    <h4><i class="fas fa-cloud-upload-alt"></i> Distribution</h4>
+                    <span class="skill-tag">DistroKid</span>
+                    <span class="skill-tag">SoundOn</span>
+                    <span class="skill-tag">OneRPM</span>
+                    <span class="skill-tag">Africori</span>
+                    <span class="skill-tag">Warner Music Group</span>
+                </div>
+                <div class="skill-group">
+                    <h4><i class="fas fa-users"></i> Social & Gestion</h4>
+                    <span class="skill-tag">Community Management</span>
+                    <span class="skill-tag">SEO / Analytics</span>
+                    <span class="skill-tag">Notion</span>
+                    <span class="skill-tag">Figma</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PAGE 4 : ÉDUCATION (motif : vagues) ========== -->
+    <section id="education" class="section">
+        <div class="container">
+            <h2 class="section-title">Éducation</h2>
+            <div class="edu-item">
+                <h3>Génie Informatique</h3>
+                <div class="meta"><i class="fas fa-university"></i> UCBC · RDC (en cours)</div>
+                <p>Spécialisation en systèmes embarqués, IA et mathématiques appliquées. Projets de recherche en traitement audio.</p>
+            </div>
+            <div class="edu-item">
+                <h3>Certificat en Distribution Musicale</h3>
+                <div class="meta"><i class="fas fa-certificate"></i> Berklee Online · 2025</div>
+                <p>Stratégies de diffusion, droits d'auteur, marketing pour artistes indépendants.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PAGE 5 : EXPÉRIENCE (motif : zigzag) ========== -->
+    <section id="experience" class="section">
+        <div class="container">
+            <h2 class="section-title">Expérience</h2>
+            <div class="exp-grid">
+                <div class="exp-card">
+                    <div class="exp-title">Distributrice musicale</div>
+                    <div class="exp-org">Freelance</div>
+                    <div class="exp-date">2024 – présent</div>
+                    <p>Accompagnement d'artistes sur DistroKid, SoundOn, OneRPM, Africori. Plus de 30 titres distribués.</p>
+                </div>
+                <div class="exp-card">
+                    <div class="exp-title">Community Manager</div>
+                    <div class="exp-org">Kinda Vibe / Charmante Super Market</div>
+                    <div class="exp-date">2023 – 2024</div>
+                    <p>Gestion des réseaux sociaux, campagne de promotion, engagement des communautés.</p>
+                </div>
+                <div class="exp-card">
+                    <div class="exp-title">Développeuse Web</div>
+                    <div class="exp-org">Projets personnels</div>
+                    <div class="exp-date">2022 – présent</div>
+                    <p>Création de sites vitrines pour artistes et labels (K.A.S Maseason, Lith Industry).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PAGE 6 : CONTACT + LOGOS (motif : étoiles) ========== -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title">Contact & Partenaires</h2>
+
+            <!-- LOGOS -->
+            <div class="logos-grid">
+                <span class="logo-item"><i class="fas fa-check-circle"></i> Kinda Vibe</span>
+                <span class="logo-item"><i class="fas fa-store"></i> Charmante Super Market</span>
+                <span class="logo-item"><i class="fas fa-tag"></i> K.A.S Maseason</span>
+                <span class="logo-item"><i class="fas fa-industry"></i> Lith Industry</span>
+                <span class="logo-item"><i class="fas fa-play-circle"></i> SoundOn</span>
+                <span class="logo-item"><i class="fas fa-distribute"></i> DistroKid</span>
+                <span class="logo-item"><i class="fas fa-circle"></i> OneRPM</span>
+                <span class="logo-item"><i class="fas fa-music"></i> Warner Music</span>
+                <span class="logo-item"><i class="fas fa-globe-africa"></i> Africori</span>
+            </div>
+
+            <div class="contact-row">
+                <div class="contact-info">
+                    <p><i class="fas fa-envelope"></i> peggy@portfolio.tech</p>
+                    <p><i class="fas fa-phone-alt"></i> +243 123 456 789</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Kinshasa, RDC</p>
+                    <p><i class="fab fa-linkedin"></i> /in/peggy-dev</p>
+                    <p><i class="fab fa-github"></i> peggy-codes</p>
+                    <p><i class="fab fa-instagram"></i> @peggy_music</p>
+                    <p style="margin-top:1rem; font-size:0.95rem; color:#3d5a78;">
+                        <i class="fas fa-headphones"></i> Distribution : <strong>Peggy Beats</strong>
+                    </p>
+                </div>
+                <div class="contact-form">
+                    <form action="#" method="post">
+                        <input type="text" placeholder="Votre nom" required />
+                        <input type="email" placeholder="Email" required />
+                        <textarea placeholder="Message (distribution, collaboration, dev...)"></textarea>
+                        <button type="submit"><i class="fas fa-paper-plane"></i> Envoyer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="container">
+            <p style="margin-bottom:0.5rem;">
+                &copy; 2026 Peggy — Génie informatique · Distribution musicale · Artiste
+            </p>
+            <p>
+                <a href="#accueil"><i class="fas fa-arrow-up"></i> Retour</a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scroll spy -->
+    <script>
+        (function() {
+            const sections = document.querySelectorAll('.section');
+            const navLinks = document.querySelectorAll('.nav-links a');
+
+            function setActiveLink() {
+                let current = '';
+                sections.forEach(section => {
+                    const top = section.offsetTop - 120;
+                    if (window.scrollY >= top) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + current) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', setActiveLink);
+            window.addEventListener('load', setActiveLink);
+        })();
+    </script>
+</body>
+</html>
